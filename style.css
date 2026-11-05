@@ -1,0 +1,171 @@
+/* ---------- Colour + type system ---------- */
+:root {
+  --brand: #5b3df5;        /* links, buttons, accents */
+  --brand-dark: #4328d4;   /* hover */
+  --ink: #1b1b2f;          /* main text */
+  --muted: #55556d;        /* secondary text */
+  --bg: #f6f6fb;           /* page background */
+  --card: #ffffff;         /* card / header surface */
+  --line: #e2e2ee;         /* borders */
+  --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+/* ---------- Base (mobile first) ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 7rem; }
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--bg);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+h1, h2, h3 { line-height: 1.25; margin: 0 0 0.5rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.15rem; }
+p  { margin: 0 0 1rem; }
+
+a { color: var(--brand); }
+a:hover { color: var(--brand-dark); }
+a:focus-visible { outline: 3px solid var(--brand); outline-offset: 3px; border-radius: 4px; }
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  padding: 0.5rem 1rem;
+  background: var(--brand);
+  color: #fff;
+  border-radius: 0 0 8px 8px;
+  z-index: 10;
+}
+.skip-link:focus { top: 0; color: #fff; }
+
+/* ---------- Header: Flexbox row ---------- */
+.site-header {
+  display: flex;
+  flex-wrap: wrap;               /* nav drops under the name on narrow phones */
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  padding: 0.75rem 1.25rem;
+  background: var(--card);
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.site-name { font-size: 1.25rem; margin: 0; }
+
+.nav-list {
+  display: flex;
+  gap: 0.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-list a {
+  display: block;
+  padding: 0.6rem 0.9rem;        /* comfortable tap target on phones */
+  border-radius: 999px;
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 600;
+}
+.nav-list a:hover { background: var(--bg); color: var(--brand); }
+
+/* ---------- Sections ---------- */
+main { max-width: 64rem; margin: 0 auto; padding: 0 1.25rem; }
+.section { padding: 2.5rem 0 1rem; }
+.lead { font-size: 1.15rem; font-weight: 600; }
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 1.25rem 0 0;
+  padding: 0;
+}
+.skills li {
+  padding: 0.3rem 0.85rem;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--brand);
+}
+
+/* ---------- Projects: CSS Grid (1 column on mobile) ---------- */
+.project-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.card {
+  display: flex;                 /* keeps the link at the bottom of each card */
+  flex-direction: column;
+  padding: 1.25rem;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.card p { color: var(--muted); flex: 1; }
+.card-link { font-weight: 600; text-decoration: none; }
+.card-link:hover { text-decoration: underline; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .card { transition: transform 0.15s ease, box-shadow 0.15s ease; }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(27, 27, 47, 0.1); }
+}
+
+/* ---------- Footer / contact ---------- */
+.site-footer {
+  margin-top: 3rem;
+  padding: 2rem 1.25rem;
+  background: var(--ink);
+  color: #fff;
+  text-align: center;
+}
+.site-footer p { color: #d8d8e6; }
+.contact-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem 1.5rem;
+  list-style: none;
+  margin: 0 0 1.25rem;
+  padding: 0;
+}
+.contact-list a { color: #fff; font-weight: 600; }
+.contact-list a:hover { color: #c9bfff; }
+.copyright { font-size: 0.85rem; margin: 0; }
+
+/* ---------- Tablet: 2 columns ---------- */
+@media (min-width: 600px) {
+  .site-header { padding: 1rem 2rem; }
+  .site-name { font-size: 1.4rem; }
+  h2 { font-size: 1.75rem; }
+  .project-grid { grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+}
+
+/* ---------- Desktop: 3 columns ---------- */
+@media (min-width: 900px) {
+  .section { padding-top: 3.5rem; }
+  .project-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+}
